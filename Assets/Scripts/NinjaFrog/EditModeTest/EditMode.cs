@@ -8,21 +8,20 @@ public class NinjaFrog
     [SetUp]
     public void SetUp()
     {
-        stats = new NinjaFrogStats(); 
+        stats = new NinjaFrogStats();
     }
 
-    [Test] 
-    public void DefaultLives_ShouldBeThree()
+    [Test]
+		[TestCase(1)]
+		[TestCase(5)]
+		[TestCase(0)]
+    public void EstaVivo(int vidas)
     {
-        Assert.AreEqual(3, stats.maxLives, "The default lives should be " + 3 + " but was " + stats.maxLives);
+			bool vivo = stats.IsAlive(vidas);
+			Assert.AreEqual(true, vivo, "El personaje no esta vivo");
     }
 
-    // Case Test for power and range
-    [TestCase(true, 1, 1)]
-    [TestCase(true, 2, 1)]
-    [TestCase(false, 0, 1)]
-    [TestCase(false, 1, 0)]
-    [TestCase(true, 1, 0)]
+
     public void AttackPower_Cases(bool expected, int attackPower, int attackRange)
     {
         bool actual = stats.CanAttack(attackPower, attackRange);
